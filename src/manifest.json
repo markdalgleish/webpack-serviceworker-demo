@@ -1,0 +1,7 @@
+{
+  "name": "Webpack Service Worker Demo",
+  "short_name": "Webpack",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <title>Webpack Service Worker Demo</title>
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <h1>Webpack Service Worker Demo</h1>
+    <div id="outlet"><%- html %></div>
+    <% for (var chunk in assets) { -%>
+    <script src="<%= assets[chunk] %>"></script>
+    <% } -%>
+  </body>
+</html>
