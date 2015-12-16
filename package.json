@@ -30,6 +30,7 @@
     "react-dom": "^0.14.3",
     "serviceworker-loader": "^0.1.0",
     "static-site-generator-webpack-plugin": "^2.0.1",
+    "steed": "^1.1.2",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   }
