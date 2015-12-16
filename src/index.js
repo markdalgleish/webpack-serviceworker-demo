@@ -1,4 +1,4 @@
-require('file?name=manifest.json!./manifest.json');
+require('file?name=manifest.json!../web-app-manifest-loader!./manifest.json');
 
 import React from 'react';
 import { render } from 'react-dom';

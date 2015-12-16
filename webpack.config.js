@@ -25,6 +25,10 @@ module.exports = {
           presets: ['react', 'es2015']
         },
         exclude: /node_modules/
+      },
+      {
+        test: /\.png$/,
+        loader: 'file-loader'
       }
     ]
   },

@@ -3,5 +3,12 @@
   "short_name": "Webpack",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icons/icon-6x.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
