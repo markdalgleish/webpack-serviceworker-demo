@@ -19,6 +19,10 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /manifest.json$/,
+        loader: 'file?name=manifest.json!../web-app-manifest-loader'
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
