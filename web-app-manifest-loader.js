@@ -2,16 +2,16 @@ var path = require('path');
 var loaderUtils = require('loader-utils');
 var steed = require('steed');
 
-function resolveIconSrc(loaderContext, icon, callback) {
+function resolveImageSrc(loaderContext, image, callback) {
   var dirname = path.dirname(loaderContext.resourcePath);
 
-  // Resolve the icon filename relative to the manifest file
-  loaderContext.resolve(dirname, icon.src, function(err, filename) {
+  // Resolve the image filename relative to the manifest file
+  loaderContext.resolve(dirname, image.src, function(err, filename) {
     if (err) {
       return callback(err);
     }
 
-    // Ensure Webpack knows that the icon is a dependency of the manifest
+    // Ensure Webpack knows that the image is a dependency of the manifest
     loaderContext.dependency && loaderContext.dependency(filename);
 
     // Asynchronously pass the image through the loader pipeline
@@ -20,12 +20,28 @@ function resolveIconSrc(loaderContext, icon, callback) {
         return callback(err);
       }
 
-      // Update the icon src property to match the generated filename
+      // Update the image src property to match the generated filename
       // Is it always the first key in the assets object?
-      icon.src = Object.keys(module.assets)[0];
+      image.src = Object.keys(module.assets)[0];
 
-      callback(null, icon);
+      callback(null, image);
     });
+  });
+}
+
+function resolveImages(loaderContext, manifest, key, callback) {
+  if (!Array.isArray(manifest[key])) {
+    return callback(null);
+  }
+
+  steed.map(manifest[key], resolveImageSrc.bind(null, loaderContext), function(err, images) {
+    if (err) {
+      return callback(err);
+    }
+
+    manifest[key] = images;
+
+    callback(null);
   });
 }
 
@@ -35,17 +51,14 @@ module.exports = function(source) {
   var loaderContext = this;
   var callback = loaderContext.async();
 
-  if (Array.isArray(manifest.icons)) {
-    steed.map(manifest.icons, resolveIconSrc.bind(null, loaderContext), function(err, icons) {
-      if (err) {
-        return callback(err);
-      }
+  steed.parallel([
+    resolveImages.bind(null, loaderContext, manifest, 'splash_screens'),
+    resolveImages.bind(null, loaderContext, manifest, 'icons')
+  ], function(err) {
+    if (err) {
+      return callback(err);
+    }
 
-      manifest.icons = icons;
-
-      callback(null, JSON.stringify(manifest, null, 2));
-    });
-  } else {
     callback(null, JSON.stringify(manifest, null, 2));
-  }
+  });
 };

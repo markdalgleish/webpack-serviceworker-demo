@@ -4,6 +4,18 @@
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
+  "splash_screens": [
+    {
+      "src": "./splash/splash-med.png",
+      "sizes": "1920x1080",
+      "type": "image/png"
+    },
+    {
+      "src": "./splash/splash-hi.png",
+      "sizes": "2560x1440",
+      "type": "image/png"
+    }
+  ],
   "icons": [
     {
       "src": "./icons/icon-4x.png",
