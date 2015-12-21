@@ -24,7 +24,7 @@ function resolveImageSrc(loaderContext, image, callback) {
       // Is it always the first key in the assets object?
       image.src = Object.keys(module.assets)[0];
 
-      callback(null, image);
+      callback(null);
     });
   });
 }
@@ -34,12 +34,10 @@ function resolveImages(loaderContext, manifest, key, callback) {
     return callback(null);
   }
 
-  steed.map(manifest[key], resolveImageSrc.bind(null, loaderContext), function(err, images) {
+  steed.each(manifest[key], resolveImageSrc.bind(null, loaderContext), function(err) {
     if (err) {
       return callback(err);
     }
-
-    manifest[key] = images;
 
     callback(null);
   });
