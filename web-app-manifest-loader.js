@@ -34,7 +34,7 @@ function resolveImages(loaderContext, manifest, key, callback) {
     return callback(null);
   }
 
-  steed.map(manifest[key], resolveImageSrc.bind(null, loaderContext), function(err, images) {
+  steed.each(manifest[key], resolveImageSrc.bind(null, loaderContext), function(err, images) {
     if (err) {
       return callback(err);
     }
