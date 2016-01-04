@@ -20,7 +20,7 @@ module.exports = {
     loaders: [
       {
         test: /manifest.json$/,
-        loader: 'file?name=manifest.json!../web-app-manifest-loader'
+        loader: 'file?name=manifest.json!web-app-manifest-loader'
       },
       {
         test: /\.js$/,
@@ -32,7 +32,7 @@ module.exports = {
       },
       {
         test: /\.png$/,
-        loader: 'file-loader'
+        loader: 'file'
       }
     ]
   },

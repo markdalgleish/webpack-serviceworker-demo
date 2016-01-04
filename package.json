@@ -31,6 +31,7 @@
     "serviceworker-loader": "^0.1.0",
     "static-site-generator-webpack-plugin": "^2.0.1",
     "steed": "^1.1.2",
+    "web-app-manifest-loader": "^0.1.1",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
   }
